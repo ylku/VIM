@@ -1,0 +1,266 @@
+"-----------------------------------------------------------------------------
+" Buzz's vimrc (python version)
+" Yao-Lun Ku <ylku.buzz[At]gmail[Dot]com>
+" https://github.com/ylku/VIM
+"-----------------------------------------------------------------------------
+" For pathogen.vim: auto load all plugins in .vim/bundle
+execute pathogen#infect()
+call pathogen#helptags()
+
+let python_highlight_all=1
+syntax enable
+set t_Co=256
+"set t_AB=^[[48;5;%dm
+"set t_AF=^[[38;5;%dm
+
+"set background=light
+set background=dark
+
+let g:solarized_termcolors=256
+let g:solarized_termtrans = 0
+let g:solarized_degrade = 0
+let g:solarized_bold = 1 
+let g:solarized_underline = 1 
+let g:solarized_italic = 1 
+let g:solarized_contrast = "normal" "“normal”| “high” or “low” 
+let g:solarized_visibility= "normal" "“normal”| “high” or “low”
+
+"colorscheme solarized
+"colorscheme molokai
+"colorscheme wombat256
+colorscheme gruvbox
+
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <C-\> za
+
+function! HasPaste()
+    if &paste
+        return '[PASTE]'
+    else
+        return ''
+    endif
+endfunction
+
+"----------------------------------------------------------------------------
+" General setting
+"----------------------------------------------------------------------------
+set colorcolumn=120     " Right margin "
+set nocompatible		" not compatible with the old-fashion vi mode
+set ruler				" show the cursor position all the time
+set cursorline          " highlight current line "
+"highlight CursorLine          guibg=#003853 ctermbg=255  gui=none cterm=none
+set autoread            " auto read when file is changed from outside 
+set laststatus=2
+set history=50          " keep 50 lines of command line history
+set showmode			" Show current mode
+set showmatch			" Cursor shows matching ) and }
+set wildchar=<TAB>		" Start wild expansion in the command line using <TAB>
+set wildmenu			" wild char competion menu
+set bs=2                " allow backspacing over everything in insert mode
+
+filetype on           " Enable filetype detection
+filetype indent on    " Enable filetype-specific indenting
+filetype plugin on    " Enable filetype-specific plugins
+
+" auto reload vimrc when editing it
+autocmd! bufwritepost .vimrc source ~/.vimrc
+
+" ignore these files while expanding wild chars
+set wildignore=*.o,*.dep,*.swp,*.so
+
+set noerrorbells        " Disable sound on errors "
+set novisualbell        " Disable visual bell "
+
+"Restore cursor to file position in previous editing session
+set viminfo='10,\"100,:20,%,n~/.viminfo
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
+set ffs=unix,dos
+"----------------------------------------------------------------------------
+"           TAB setting
+"----------------------------------------------------------------------------
+" Replace <TAB> with space. 
+" Hitting Tab in insert mode will produce the appropriate number of spaces
+"----------------------------------------------------------------------------
+au BufNewFile,BufRead *.py set shiftwidth=4    " Vim incident <n> space
+au BufNewFile,BufRead *.py set softtabstop=4
+au BufNewFile,BufRead *.py set tabstop=4       " tell vim how many columns a tab counts for
+au BufNewFile,BufRead *.py set textwidth=100
+au BufNewFile,BufRead *.py set expandtab       " replace <TAB> with spaces
+au BufNewFile,BufRead *.py set fileformat=unix
+
+au FileType Makefile set noexpandtab " Do not expandtab while type is Makefile
+
+" Visualizing tabs
+syntax match Tab /\t/
+hi Tab gui=underline guifg=blue ctermbg=blue
+
+"----------------------------------------------------------------------------
+"               Format automatically
+"----------------------------------------------------------------------------
+set autoindent
+set cindent
+set comments=sl:/*,mb:**,elx:*
+set copyindent      " copy the previous indentation on autoindenting
+"set smartindent    
+
+"----------------------------------------------------------------------------
+"               Searching
+"----------------------------------------------------------------------------
+set hlsearch            " highlight search
+set incsearch			" incremental search
+set ignorecase			" ignore case when searching
+set smartcase			" ignore case if search pattern is all lowercase,case-sensitive otherwise
+
+"----------------------------------------------------------------------------
+"               Mapping (map, nmap, ...)
+"----------------------------------------------------------------------------
+" Replace leader with , (default is \)
+let mapleader=","
+let g:mapleader=","
+
+" Use :update to reprace :w(Vim only).
+" Save file if there is any change
+map <F2> :up<CR>
+"save and exit
+map <F3> :up<CR>:q<CR>      
+"exit without saving
+map <F4> :q!<CR>            
+
+"Toggle on/off syntax_on
+map <F7> :if exists("syntax_on") <BAR>
+     \   syntax off <BAR><CR>
+          \ else <BAR>
+               \   syntax enable <BAR>
+                    \ endif <CR>
+
+" +--------------------------------+
+" |         split windows          |
+" +--------------------------------+
+" Move to and maximize the below split
+"nmap <C-J> <C-W>j<C-W>_
+nmap <C-J> <C-W><C-J>
+" Move to and maximize the above split
+"nmap <C-K> <C-W>k<C-W>_
+nmap <C-K> <C-W><C-K>
+" Move to and maximize the right split
+"nmap <C-H> <C-W>l<C-W><bar>
+nmap <C-H> <C-W><C-H>
+" Move to and maximize the left split
+"nmap <C-L> <C-W>h<C-W><bar>
+nmap <C-L> <C-W><C-L>
+
+" +--------------------------------+
+" |         Task List              |
+" +--------------------------------+
+map <leader>td <Plug>TaskList
+
+" +--------------------------------+
+" |     Gundo(Revision History     |
+" +--------------------------------+
+map <leader>g :GundoToggle<CR>
+
+" +--------------------------------+
+" |         Indentation            |
+" +--------------------------------+
+" Multiline indent/un-indent (V mode)
+vmap > >gv
+vmap < <gv
+" Current line indent/un-indent (N mode)
+nmap > v><ESC>
+nmap < v<<ESC>
+
+"show lines with matching word under cursor
+nmap <leader>lns [I
+
+"========== imap ============
+"example: imap ;so System.out.println();<left><left>
+"example: imap ;ne <esc>/;<cr>a
+
+"----------------------------------------------------------------------------
+"             Encoding
+"----------------------------------------------------------------------------
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+
+"----------------------------------------------------------------------------
+"           Plugin (.vim/bundle/*)
+"----------------------------------------------------------------------------
+" +--------------------------------+
+" |         EasyMotion             |
+" +--------------------------------+
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade  Comment
+
+"hi EasyMotionTarget ctermbg=black ctermfg=196
+"hi EasyMotionShade  ctermbg=none ctermfg=grey
+
+let g:pyflakes_use_quickfix = 0
+
+let g:pep8_map='<leader>8'
+
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+
+set completeopt=menuone,longest,preview
+
+map <leader>j :RopeGotoDefinition<CR>
+map <leader>r :RopeRename<CR>
+
+nmap <leader>a <Esc>:Ack!
+
+"%{fugitive#statusline()}
+
+map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
+
+" Execute the tests
+nmap <silent><Leader>tf <Esc>:Pytest file<CR>
+nmap <silent><Leader>tc <Esc>:Pytest class<CR>
+nmap <silent><Leader>tm <Esc>:Pytest method<CR>
+" cycle through test errors
+nmap <silent><Leader>tn <Esc>:Pytest next<CR>
+nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
+nmap <silent><Leader>te <Esc>:Pytest error<CR>
+
+" Toggle on/off paste mode
+map <F12> :set paste!<BAR>set paste?<CR>
+set pastetoggle=<F12>
+
+" +--------------------------------------------------------------+
+" |         Syntastic:syntax checking plugin for Vim             |
+" +--------------------------------------------------------------+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" +-----------------------------------------------------------------+
+" |         Tagbar: easy way to browse the tags of the current file |
+" +-----------------------------------------------------------------+
+nmap <F8> :TagbarToggle<CR>
+
+
+" +-----------------------------------------------------------------+
+" |YouCompleteMe: fast, as-you-type, fuzzy-search code completion   |
+" +-----------------------------------------------------------------+
+let g:ycm_autoclose_preview_window_after_completion=1
+
+" +-----------------------------------------------------------------+
+" | NerdTree                                                        |
+" +-----------------------------------------------------------------+
+map <leader>n :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+" +-----------------------------------------------------------------+
+" | CtrlP                                                           |
+" +-----------------------------------------------------------------+
+" Exclude files and directories
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'

@@ -1,0 +1,30 @@
+[submodule "python/vim/bundle/fugitive"]
+	path = python/vim/bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "python/vim/bundle/pytest"]
+	path = python/vim/bundle/pytest
+	url = https://github.com/alfredodeza/pytest.vim.git
+[submodule "python/vim/bundle/vim-surround"]
+	path = python/vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "python/vim/bundle/nerdcommenter"]
+	path = python/vim/bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "python/vim/bundle/ack"]
+	path = python/vim/bundle/ack
+	url = https://github.com/mileszs/ack.vim.git
+[submodule "python/vim/bundle/pydoc"]
+	path = python/vim/bundle/pydoc
+	url = https://github.com/fs111/pydoc.vim.git
+[submodule "python/vim/bundle/nerdtree"]
+	path = python/vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "python/vim/bundle/snipmate"]
+	path = python/vim/bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim.git
+[submodule "python/vim/bundle/tagbar"]
+	path = python/vim/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar.git
+[submodule "python/vim/bundle/pep8"]
+	path = python/vim/bundle/pep8
+	url = https://github.com/PyCQA/pep8.git

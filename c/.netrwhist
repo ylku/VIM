@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/buzz/NEC_Mercury/cmm1126_two_CMM_issue/platform/ast2400/evb/ast2400_evb_build'
+let g:netrw_dirhist_2='/home/bku/nec_mercury/cmm0101/platform/ast2400/evb/ast2400_evb_build/apps'
+let g:netrw_dirhist_3='/home/bku/merge_core_cmpnt/cmm0624_IntegrationTest/platform/ast2400/evb/ast2400_evb_build/apps/ipmi/core/sdf/ipmi/bld'
+let g:netrw_dirhist_4='/home/bku/merge_core_cmpnt/cmm0721/platform/ast2400/evb/ast2400_evb_build/apps/ipmi'
+let g:netrw_dirhist_5='/home/bku/.vim'
